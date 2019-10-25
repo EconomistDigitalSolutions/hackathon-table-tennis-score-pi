@@ -84,11 +84,6 @@ def renderDisplay(state):
         player = state.p1 if state.score[0] > state.score[1] else state.p2 
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
-def checkWin(player, state):
-    abs_diff = abs(state.score[0] - state.score[1])
-    score = state.score[0] if player == P1 else state.score[1]
-    return abs_diff >= 2 and score >= 21
-
 def handleButton(player, state):
     playerId = 0 if player == P1 else 1
     if state.win:
