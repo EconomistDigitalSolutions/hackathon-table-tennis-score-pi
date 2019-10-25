@@ -81,7 +81,7 @@ def renderDisplay(state):
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
 def handleButton(player, state):
-    playerId = 0 if player == P1 else 1
+    playerId = 0 if player == state.p1 else 1
     if state.win:
         state.games[playerId] += 1
         state.resetScores()
