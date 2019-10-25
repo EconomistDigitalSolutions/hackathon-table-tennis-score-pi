@@ -19,6 +19,11 @@ P2_SCORE = 0
 P1_GAMES = 0
 P2_GAMES = 0
 
+P1 = "Player 1"
+P2 = "Player 2"
+SCORE = [0, 0]
+GAMES = [0, 0]
+
 WIN = False
 
 # Numbers pins by physical location
@@ -55,20 +60,17 @@ def renderDisplay(win=False):
     # Send some more text
     lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_1)
     if not win:
-        lcd.lcd_string(f"Player 1: {P1_SCORE}", lcd.LCD_LINE_2)
-        lcd.lcd_string(f"Player 2: {P2_SCORE}", lcd.LCD_LINE_3)
-        lcd.lcd_string(f"{P1_GAMES} - {P2_GAMES}", lcd.LCD_LINE_4)
+        lcd.lcd_string(f"{P1}: {SCORE[0]}", lcd.LCD_LINE_2)
+        lcd.lcd_string(f"{P2}: {SCORE[1]}", lcd.LCD_LINE_3)
+        lcd.lcd_string(f"{GAMES[0]} - {GAMES[1]}", lcd.LCD_LINE_4)
     else:
-        player = "Player 1" if P1_SCORE > P2_SCORE else "Player 2" 
+        player = P1 if SCORE[0] > SCORE[1] else P2 
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
 def checkWin(player):
-    abs_diff = abs(P1_SCORE - P2_SCORE)
-    print(abs_diff)
-    if player == 1:
-        return abs_diff >= 2 and P1_SCORE >= 21
-    else:
-        return abs_diff >= 2 and P2_SCORE >= 21
+    abs_diff = abs(SCORE[0] - SCORE[1])
+    score = SCORE[0] if player == P1 else SCORE[1]
+    return abs_diff >= 2 and score >= 21
 
 def reset():
     global P1_SCORE
@@ -76,35 +78,28 @@ def reset():
     global P2_SCORE
     P2_SCORE = 0
     global WIN
-    WIN = False 
+    WIN = False
+    global SCORE
+    SCORE = [0, 0] 
+
+def handleButton(player):
+    playerId = 0 if player == P1 else 1
+    if WIN:
+        GAMES[playerId] += 1
+        reset()
+    else:
+        print(f"\n Button pressed {PIN_BUTTON_A}")
+        SCORE[playerId] += 1
+        WIN = checkWin(player)
+    renderDisplay(WIN)
 
 renderDisplay()
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            if WIN:
-                P1_GAMES += 1
-                reset()
-                renderDisplay(WIN)
-            else:
-                print(f"\n Button pressed {PIN_BUTTON_A}")
-                P1_SCORE += 1
-                WIN = checkWin(1)
-                renderDisplay(WIN)
-                GPIO.output(PIN_LED_A, GPIO.HIGH)
-                GPIO.output(PIN_LED_A, GPIO.LOW)
+            handleButton(P1)
         if GPIO.event_detected(PIN_BUTTON_B):
-            if WIN:
-                P2_GAMES += 1
-                reset()
-                renderDisplay(WIN)
-            else:
-                print(f"\n Button pressed {PIN_BUTTON_B}")
-                P2_SCORE += 1
-                WIN = checkWin(2)
-                renderDisplay(WIN)
-                GPIO.output(PIN_LED_B, GPIO.HIGH)
-                GPIO.output(PIN_LED_B, GPIO.LOW)
+            handleButton(P2)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
