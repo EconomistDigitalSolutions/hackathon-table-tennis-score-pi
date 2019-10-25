@@ -98,9 +98,9 @@ renderDisplay()
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            WIN = handleButton(P1)
+            WIN = handleButton(P1, WIN)
         if GPIO.event_detected(PIN_BUTTON_B):
-            WIN = handleButton(P2)
+            WIN = handleButton(P2, WIN)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
