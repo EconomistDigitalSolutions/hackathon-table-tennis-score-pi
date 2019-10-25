@@ -82,26 +82,25 @@ def reset():
     global SCORE
     SCORE = [0, 0] 
 
-def handleButton(player):
+def handleButton(player, win):
     playerId = 0 if player == P1 else 1
-    global WIN
-    if WIN:
+    if win:
         GAMES[playerId] += 1
         reset()
     else:
         print(f"\n Button pressed {PIN_BUTTON_A}")
         SCORE[playerId] += 1
-        global WIN
-        WIN = checkWin(player)
-    renderDisplay(WIN)
+        win = checkWin(player)
+    renderDisplay(win)
+    return win
 
 renderDisplay()
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            handleButton(P1)
+            WIN = handleButton(P1)
         if GPIO.event_detected(PIN_BUTTON_B):
-            handleButton(P2)
+            WIN = handleButton(P2)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
