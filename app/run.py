@@ -54,7 +54,7 @@ def renderDisplay(win=False):
         lcd.lcd_string(f"Player 2: {P2_SCORE}", lcd.LCD_LINE_3)
     else:
         player = "Player 1" if P1_SCORE > P2_SCORE else "Player 2" 
-        lcd.lcd_string(f"WINNER! ")
+        lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
 def checkWin(player):
     if player == 1:
