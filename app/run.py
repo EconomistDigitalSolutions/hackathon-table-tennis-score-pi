@@ -14,17 +14,7 @@ PIN_BUTTON_B = 37
 PIN_LED_A = 32
 PIN_LED_B = 33
 
-P1_SCORE = 0
-P2_SCORE = 0
-P1_GAMES = 0
-P2_GAMES = 0
-
-P1 = "Player 1"
-P2 = "Player 2"
-SCORE = [0, 0]
-GAMES = [0, 0]
-
-WIN = False
+PIN_RESET_BUTTON = 11
 
 # Numbers pins by physical location
 GPIO.setmode(GPIO.BOARD)
@@ -35,6 +25,7 @@ GPIO.setup(PIN_LED_B, GPIO.OUT)
 # GPIO PIN_BUTTON set up as input.
 GPIO.setup(PIN_BUTTON_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(PIN_BUTTON_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(PIN_RESET_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 print(f"Waiting for falling edge on port {PIN_BUTTON_A} or {PIN_BUTTON_B}")
 # now the program will do nothing until the signal on the pin
@@ -45,6 +36,7 @@ print(f"Waiting for falling edge on port {PIN_BUTTON_A} or {PIN_BUTTON_B}")
 
 GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING)
 GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING)
+GPIO.add_event_detect(PIN_RESET_BUTTON, GPIO.RISING)
 
 class GameState:
     p1 = "Player 1"
@@ -109,6 +101,9 @@ try:
         if GPIO.event_detected(PIN_BUTTON_B):
             handleButton(state.p2, state)
             time.sleep(0.5)
+        if GPIO.event_detected(PIN_RESET_BUTTON):
+            state.resetGame()
+            time.sleep(1)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
