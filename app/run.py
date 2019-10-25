@@ -72,10 +72,10 @@ def checkWin(player):
 
 def reset():
     global P1_SCORE
-    global P2_SCORE
-    global WIN
     P1_SCORE = 0
+    global P2_SCORE
     P2_SCORE = 0
+    global WIN
     WIN = False 
 
 renderDisplay()
