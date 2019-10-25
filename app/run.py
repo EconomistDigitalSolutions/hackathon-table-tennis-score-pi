@@ -98,7 +98,7 @@ def handleButton(player, state):
         print(f"\n Button pressed {PIN_BUTTON_A}")
         state.score[playerId] += 1
         state.checkWin(player)
-    renderDisplay(state.win)
+    renderDisplay(state)
 
 # def renderDisplay(win=False):
 
@@ -148,7 +148,7 @@ def handleButton(player, state):
     # return win
 
 state = GameState()
-renderDisplay()
+renderDisplay(state)
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
