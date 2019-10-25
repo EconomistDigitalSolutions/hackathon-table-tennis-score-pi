@@ -37,7 +37,7 @@ GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING)
 GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING)
 
 
-def renderDisplay(win=false):
+def renderDisplay(win=False):
 
     # Initialise display
     lcd.lcd_init()
