@@ -102,6 +102,7 @@ try:
             handleButton(state.p2, state)
             time.sleep(0.5)
         if GPIO.event_detected(PIN_RESET_BUTTON):
+            print(f"\n Button pressed {PIN_RESET_BUTTON}")
             state.resetGame()
             time.sleep(1)
 except KeyboardInterrupt:
