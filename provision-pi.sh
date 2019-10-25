@@ -49,7 +49,7 @@ systemctl enable hackathon-table-tennis-score.service
 # NB rc.local runs !#/bin/sh not !#bin/bash
 export totalLength=$(($(< /etc/rc.local wc -l)-1))
 sed -i "${totalLength}a\
-# pull latest Akaal switch code\n/opt/akaal-switch/git-pull.sh\n" /etc/rc.local
+# pull latest hackathon-table-tennis-score code\n/opt/hackathon-table-tennis-score/git-pull.sh\n" /etc/rc.local
 
 # reboot every night to apply any kernel updates and get latest code
 echo $'#!/bin/bash

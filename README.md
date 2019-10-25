@@ -64,11 +64,12 @@ based on: https://github.com/jujhars13/akaal-switch
 - [ ] stick screen and pi to table tennis table
 - [ ] take photo of mvp setup
 - [ ] ensure pi has autoupdates on
-- [ ] re-install raspbian lite and redeploy w/ provision script
-- [ ] take photo of final setup
-
-### Optional
-- [ ] solder things up to a board
+- [ ] deploy prod
+    - [ ] test
+    - [ ] re-install raspbian lite and redeploy w/ provision script
+    - [ ] take photo of final setup
+- [ ] Optional
+    - [ ] solder things up to a board
 
 ## Licence
 
