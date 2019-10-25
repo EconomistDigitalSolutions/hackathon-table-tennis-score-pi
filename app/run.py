@@ -34,6 +34,24 @@ print(f"Waiting for falling edge on port {PIN_BUTTON_A} or {PIN_BUTTON_B}")
 GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING)
 GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING)
 
+
+def renderDisplay():
+
+    # Initialise display
+    lcd.lcd_init()
+
+    now = datetime.now()
+
+    # dd/mm/YY H:M:S
+    date_time = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    # Send some more text
+    lcd.lcd_string("Line 1:", lcd.LCD_LINE_1)
+    lcd.lcd_string("Line2", lcd.LCD_LINE_2)
+    lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_3)
+    lcd.lcd_string("Line 3", lcd.LCD_LINE_4)
+
+
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
@@ -52,20 +70,3 @@ except KeyboardInterrupt:
 
 GPIO.cleanup()
 print("Stopping Table Tennis Switch")
-
-
-def renderDisplay():
-
-    # Initialise display
-    lcd.lcd_init()
-
-    now = datetime.now()
-
-    # dd/mm/YY H:M:S
-    date_time = now.strftime("%d/%m/%Y %H:%M:%S")
-
-    # Send some more text
-    lcd.lcd_string("Line 1:", lcd.LCD_LINE_1)
-    lcd.lcd_string("Line2", lcd.LCD_LINE_2)
-    lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_3)
-    lcd.lcd_string("Line 3", lcd.LCD_LINE_4)
