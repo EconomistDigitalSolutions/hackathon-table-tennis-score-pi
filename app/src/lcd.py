@@ -9,7 +9,7 @@ import smbus
 import time
 
 # Define some device parameters
-I2C_ADDR = 0x3f  # I2C device address, if any error, change this address to 0x3f
+I2C_ADDR = 0x3f  # use `i2cdetect -y 1` to find address of screen
 LCD_WIDTH = 20   # Maximum characters per line
 
 # Define some device constants
