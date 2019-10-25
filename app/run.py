@@ -100,53 +100,6 @@ def handleButton(player, state):
         state.checkWin(player)
     renderDisplay(state)
 
-# def renderDisplay(win=False):
-
-#     # Initialise display
-#     lcd.lcd_init()
-
-#     now = datetime.now()
-
-#     # dd/mm/YY H:M:S
-#     date_time = now.strftime("%d/%m/%Y %H:%M:%S")
-
-#     # Send some more text
-#     lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_1)
-#     if not win:
-#         lcd.lcd_string(f"{P1}: {SCORE[0]}", lcd.LCD_LINE_2)
-#         lcd.lcd_string(f"{P2}: {SCORE[1]}", lcd.LCD_LINE_3)
-#         lcd.lcd_string(f"{GAMES[0]} - {GAMES[1]}", lcd.LCD_LINE_4)
-#     else:
-#         player = P1 if SCORE[0] > SCORE[1] else P2 
-#         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
-
-# def checkWin(player):
-#     abs_diff = abs(SCORE[0] - SCORE[1])
-#     score = SCORE[0] if player == P1 else SCORE[1]
-#     return abs_diff >= 2 and score >= 21
-
-# def reset():
-#     global P1_SCORE
-#     P1_SCORE = 0
-#     global P2_SCORE
-#     P2_SCORE = 0
-#     global WIN
-#     WIN = False
-#     global SCORE
-#     SCORE = [0, 0] 
-
-# def handleButton(player, win):
-#     playerId = 0 if player == P1 else 1
-#     if win:
-#         GAMES[playerId] += 1
-#         reset()
-#     else:
-#         print(f"\n Button pressed {PIN_BUTTON_A}")
-#         SCORE[playerId] += 1
-#         win = checkWin(player)
-#     renderDisplay(win)
-    # return win
-
 state = GameState()
 renderDisplay(state)
 try:
