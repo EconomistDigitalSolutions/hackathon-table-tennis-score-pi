@@ -76,12 +76,12 @@ def renderDisplay(state):
 
     # Send some more text
     lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_1)
-    if not win:
+    if not state.win:
         lcd.lcd_string(f"{state.p1}: {state.score[0]}", lcd.LCD_LINE_2)
         lcd.lcd_string(f"{state.p2}: {state.score[1]}", lcd.LCD_LINE_3)
         lcd.lcd_string(f"{state.games[0]} - {state.games[1]}", lcd.LCD_LINE_4)
     else:
-        player = state.p1 if state.score[0] > state.score[1] else P2 
+        player = state.p1 if state.score[0] > state.score[1] else state.p2 
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
 def checkWin(player, state):
