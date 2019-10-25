@@ -61,7 +61,7 @@ class GameState:
         abs_diff = abs(self.score[0] - self.score[1])
         score = self.score[0] if player == self.p1 else self.score[1]
         self.win = abs_diff >= 2 and score >= 21
-        return self.win
+        return self.winlc
 
 
 def renderDisplay(state):
@@ -93,7 +93,7 @@ def handleButton(player, state):
     playerId = 0 if player == P1 else 1
     if state.win:
         state.games[playerId] += 1
-        state.reset()
+        state.resetScores()
     else:
         print(f"\n Button pressed {PIN_BUTTON_A}")
         state.score[playerId] += 1
@@ -153,10 +153,10 @@ try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
             WhandleButton(state.p1, state)
-            time.sleep(1)
+            time.sleep(0.5)
         if GPIO.event_detected(PIN_BUTTON_B):
             handleButton(state.p2, state)
-            time.sleep(1)
+            time.sleep(0.5)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
