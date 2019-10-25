@@ -57,18 +57,18 @@ try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
             print(f"\n Button pressed {PIN_BUTTON_A}")
+            renderDisplay()
             GPIO.output(PIN_LED_A, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(PIN_LED_A, GPIO.LOW)
             P1_SCORE += 1
-            renderDisplay()
         if GPIO.event_detected(PIN_BUTTON_B):
             print(f"\n Button pressed {PIN_BUTTON_B}")
+            renderDisplay()
             GPIO.output(PIN_LED_B, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(PIN_LED_B, GPIO.LOW)
             P2_SCORE += 1
-            renderDisplay()
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
