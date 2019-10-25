@@ -53,6 +53,10 @@ class GameState:
     games = [0,0]
     win = False
 
+    def resetGame(self):
+        self.games = [0, 0]
+        self.resetScores()
+
     def resetScores(self):
         self.score = [0, 0]
         self.win = False
