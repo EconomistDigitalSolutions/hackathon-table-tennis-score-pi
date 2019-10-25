@@ -13,6 +13,9 @@ PIN_LED_B = 33
 # Numbers pins by physical location
 GPIO.setmode(GPIO.BOARD)
 
+# setup output
+GPIO.setup(PIN_LED_A, GPIO.OUT)
+GPIO.setup(PIN_LED_B, GPIO.OUT)
 # GPIO PIN_BUTTON set up as input.
 GPIO.setup(PIN_BUTTON_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(PIN_BUTTON_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -30,6 +33,13 @@ try:
         GPIO.wait_for_edge(PIN_BUTTON_A, GPIO.RISING)
         if GPIO.input(PIN_BUTTON_A):
             print(f"\n Button pressed {PIN_BUTTON_A}")
+            GPIO.output(PIN_LED_A, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(PIN_LED_A, GPIO.LOW)
+            time.sleep(1)
+            GPIO.output(PIN_LED_B, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(PIN_LED_B, GPIO.LOW)
         # if GPIO.input(PIN_BUTTON_B):
         #     print(f"\n Button pressed {PIN_BUTTON_B}")
 except KeyboardInterrupt:
