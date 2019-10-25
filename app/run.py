@@ -13,6 +13,8 @@ PIN_BUTTON_A = 36
 PIN_BUTTON_B = 37
 PIN_LED_A = 32
 PIN_LED_B = 33
+P1_SCORE = 0
+P2_SCORE = 0
 
 # Numbers pins by physical location
 GPIO.setmode(GPIO.BOARD)
@@ -46,10 +48,9 @@ def renderDisplay():
     date_time = now.strftime("%d/%m/%Y %H:%M:%S")
 
     # Send some more text
-    lcd.lcd_string("Line 1:", lcd.LCD_LINE_1)
-    lcd.lcd_string("Line2", lcd.LCD_LINE_2)
-    lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_3)
-    lcd.lcd_string("Line 3", lcd.LCD_LINE_4)
+    lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_1)
+    lcd.lcd_string(f"Player 1: {P1_SCORE}", lcd.LCD_LINE_2)
+    lcd.lcd_string(f"Player 2: {P2_SCORE}", lcd.LCD_LINE_3)
 
 
 try:
@@ -59,11 +60,14 @@ try:
             GPIO.output(PIN_LED_A, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(PIN_LED_A, GPIO.LOW)
+            P1_SCORE += 1
+            renderDisplay()
         if GPIO.event_detected(PIN_BUTTON_B):
             print(f"\n Button pressed {PIN_BUTTON_B}")
             GPIO.output(PIN_LED_B, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(PIN_LED_B, GPIO.LOW)
+            P2_SCORE += 1
             renderDisplay()
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
