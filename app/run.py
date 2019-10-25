@@ -152,7 +152,7 @@ renderDisplay(state)
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            WhandleButton(state.p1, state)
+            handleButton(state.p1, state)
             time.sleep(0.5)
         if GPIO.event_detected(PIN_BUTTON_B):
             handleButton(state.p2, state)
