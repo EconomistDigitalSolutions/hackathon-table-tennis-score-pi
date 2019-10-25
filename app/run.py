@@ -28,8 +28,8 @@ try:
         # poll
         if GPIO.input(PIN_BUTTON_A):
             print(f"\n Button pressed {PIN_BUTTON_A}")
-        if GPIO.input(PIN_BUTTON_B):
-            print(f"\n Button pressed {PIN_BUTTON_B}")
+        # if GPIO.input(PIN_BUTTON_B):
+        #     print(f"\n Button pressed {PIN_BUTTON_B}")
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
