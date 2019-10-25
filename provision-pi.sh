@@ -35,11 +35,11 @@ echo "enable_tvout=0" | tee -a /boot/config.txt
 
 # deploy application via github, use https to avoid host + key issues
 # use a subshell to avoid dir issues
-(cd /opt || exit; git clone https://github.com/EconomistDigitalSolutions/hackathon-table-tennis-score)
+(cd /opt || exit; git clone https://github.com/EconomistDigitalSolutions/hackathon-table-tennis-score-pi.git)
 
 # deploy systemd service
-cp /opt/hackathon-table-tennis-score/systemd.service /lib/systemd/system/hackathon-table-tennis-score.service
-chmod 644 /lib/systemd/system/hackathon-table-tennis-score.service
+cp /opt/hackathon-table-tennis-score-pi/systemd.service /lib/systemd/system/hackathon-table-tennis-score-pi.service
+chmod 644 /lib/systemd/system/hackathon-table-tennis-score-pi.service
 systemctl daemon-reload
 systemctl enable hackathon-table-tennis-score.service
 
