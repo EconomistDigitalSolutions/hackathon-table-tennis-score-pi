@@ -57,10 +57,11 @@ def renderDisplay(win=False):
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
 def checkWin(player):
+    abs_diff = abs(P1_SCORE - P2_SCORE)
     if player == 1:
-        return P1_SCORE >= 21 and (P1_SCORE - P2_SCORE) >= 2
+        return abs_diff >= 2 and P1_SCORE >= 21
     else:
-        return P2_SCORE >= 21 and (P2_SCORE - P1_SCORE) >= 2
+        return abs_diff >= 2 and P1_SCORE >= 21
 
 renderDisplay()
 try:
