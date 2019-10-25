@@ -71,6 +71,9 @@ def checkWin(player):
         return abs_diff >= 2 and P2_SCORE >= 21
 
 def reset():
+    global P1_SCORE
+    global P2_SCORE
+    global WIN
     P1_SCORE = 0
     P2_SCORE = 0
     WIN = False 
@@ -82,7 +85,7 @@ try:
             if WIN:
                 P1_GAMES += 1
                 reset()
-                renderDisplay()
+                renderDisplay(WIN)
             else:
                 print(f"\n Button pressed {PIN_BUTTON_A}")
                 P1_SCORE += 1
@@ -94,7 +97,7 @@ try:
             if WIN:
                 P2_GAMES += 1
                 reset()
-                renderDisplay()
+                renderDisplay(WIN)
             else:
                 print(f"\n Button pressed {PIN_BUTTON_B}")
                 P2_SCORE += 1
