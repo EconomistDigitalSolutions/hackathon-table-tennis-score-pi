@@ -104,7 +104,7 @@ try:
         if GPIO.event_detected(PIN_RESET_BUTTON):
             print(f"\n Button pressed {PIN_RESET_BUTTON}")
             state.resetGame()
-            renderDisplay()
+            renderDisplay(state)
             time.sleep(1)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
