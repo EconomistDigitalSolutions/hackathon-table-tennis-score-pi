@@ -64,15 +64,15 @@ def checkWin(player):
     abs_diff = abs(P1_SCORE - P2_SCORE)
     print(abs_diff)
     if player == 1:
+        P1_GAMES += 1
         return abs_diff >= 2 and P1_SCORE >= 21
     else:
+        P2_GAMES += 1
         return abs_diff >= 2 and P2_SCORE >= 21
 
 def reset():
     P1_SCORE = 0
     P2_SCORE = 0
-    P1_GAMES = 0
-    P2_GAMES = 0
     WIN = False 
 
 renderDisplay()
@@ -81,23 +81,25 @@ try:
         if GPIO.event_detected(PIN_BUTTON_A):
             if WIN:
                 reset()
+                renderDisplay(WIN)
             else:
                 print(f"\n Button pressed {PIN_BUTTON_A}")
                 P1_SCORE += 1
                 WIN = checkWin(1)
+                renderDisplay(WIN)
                 GPIO.output(PIN_LED_A, GPIO.HIGH)
                 GPIO.output(PIN_LED_A, GPIO.LOW)
-            renderDisplay(WIN)
         if GPIO.event_detected(PIN_BUTTON_B):
             if WIN:
                 reset()
+                renderDisplay(WIN)
             else:
                 print(f"\n Button pressed {PIN_BUTTON_B}")
                 P2_SCORE += 1
                 WIN = checkWin(2)
+                renderDisplay(WIN)
                 GPIO.output(PIN_LED_B, GPIO.HIGH)
                 GPIO.output(PIN_LED_B, GPIO.LOW)
-            renderDisplay(WIN)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
