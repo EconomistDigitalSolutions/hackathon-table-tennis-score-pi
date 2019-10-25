@@ -1,3 +1,4 @@
+import RPi.GPIO as GPIO
 import time
 import os
 
@@ -25,7 +26,8 @@ print(f"Waiting for falling edge on port {PIN_BUTTON_A} or {PIN_BUTTON_B}")
 
 try:
     while True:
-        # poll
+        # interrupt, wait until true
+        GPIO.wait_for_edge(PIN_BUTTON_A, GPIO.RISING)
         if GPIO.input(PIN_BUTTON_A):
             print(f"\n Button pressed {PIN_BUTTON_A}")
         # if GPIO.input(PIN_BUTTON_B):
