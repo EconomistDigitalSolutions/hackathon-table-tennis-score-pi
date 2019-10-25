@@ -61,7 +61,7 @@ class GameState:
         abs_diff = abs(self.score[0] - self.score[1])
         score = self.score[0] if player == self.p1 else self.score[1]
         self.win = abs_diff >= 2 and score >= 21
-        return self.winlc
+        return self.win
 
 
 def renderDisplay(state):
