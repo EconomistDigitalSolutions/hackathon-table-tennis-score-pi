@@ -50,13 +50,12 @@ based on: https://github.com/jujhars13/akaal-switch
 
 ### Compulsory
 
-- [ ] unwrap and setup pi
-- [ ] install raspbian
-- [ ] solder on pi zero header pins
-- [ ] hook up pi and provision using script
-- [ ] pull latest code from github at boot (github deploy key)
-- [ ] draw wiring diagram (fritzing)
-- [ ] hook up LED response to button press
+- [x] unwrap and setup pi
+- [x] install raspbian
+- [x] hook up pi and provision using script
+- [x] pull latest code from github at boot (github deploy key)
+- [x] draw wiring diagram (fritzing)
+- [x] hook up LED response to button press
 - [ ] take photo of dev setup
 - [ ] test lcd screen wireup using `i2cdetect -y 1`
 - [ ] print message to LCD screen
@@ -69,6 +68,7 @@ based on: https://github.com/jujhars13/akaal-switch
     - [ ] re-install raspbian lite and redeploy w/ provision script
     - [ ] take photo of final setup
 - [ ] Optional
+    - [ ] solder on pi zero header pins
     - [ ] solder things up to a board
 
 ## Licence

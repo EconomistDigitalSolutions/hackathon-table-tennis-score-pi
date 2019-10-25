@@ -1,6 +1,10 @@
 import RPi.GPIO as GPIO
 import time
 import os
+from datetime import datetime
+
+# our libs
+from src import lcd
 
 print("Starting Table Tennis Switch")
 
@@ -42,8 +46,26 @@ try:
             GPIO.output(PIN_LED_B, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(PIN_LED_B, GPIO.LOW)
+            renderDisplay()
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
 GPIO.cleanup()
 print("Stopping Table Tennis Switch")
+
+
+def renderDisplay():
+
+    # Initialise display
+    lcd.lcd_init()
+
+    now = datetime.now()
+
+    # dd/mm/YY H:M:S
+    date_time = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    # Send some more text
+    lcd.lcd_string("Line 1:", lcd.LCD_LINE_1)
+    lcd.lcd_string("Line2", lcd.LCD_LINE_2)
+    lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_3)
+    lcd.lcd_string("Line 3", lcd.LCD_LINE_4)
