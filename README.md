@@ -1,7 +1,7 @@
 # hackathon-table-tennis-score-pi
 A raspi based Table Tennis score recorder
 
-![](docs/logo.png)
+![](docs/logo.png =250x)
 
 based on: https://github.com/jujhars13/akaal-switch
 
