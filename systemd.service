@@ -1,0 +1,11 @@
+[Unit]
+Description=TableTennisScore
+After=multi-user.target
+
+[Service]
+EnvironmentFile=/opt/EconomistDigitalSolutions/EconomistDigitalSolutions/.env
+Type=idle
+ExecStart=/usr/bin/python3 /opt/EconomistDigitalSolutions/app/run.py
+
+[Install]
+WantedBy=multi-user.target

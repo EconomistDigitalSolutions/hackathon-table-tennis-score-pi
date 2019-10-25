@@ -22,6 +22,30 @@ based on: https://github.com/jujhars13/akaal-switch
 
 ![wiring-diagram](docs/diagram_bb.svg)
 
+## To Deploy
+
+- Ensure you've copied `.env.template` to `.env` and populated the environment variables required.
+- Copy `provision-pi.sh` and your populated `.env` to a new [Raspbian Buster](https://www.raspberrypi.org/downloads/raspbian/) `/boot` partition
+- Once Pi has finished booting for the first time and you've configured:
+  - network(WiFi)
+  - ssh auth & security
+  - kernel support for the [i2c module](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c) use `raspi-config`
+- Run `provision-pi.sh` as `root`:
+
+  ```bash
+  sudo su -
+  bash provision-pi.sh
+  ```
+
+  This will:
+      - Install all deps
+      - checkout code to `/opt/hackathon-table-tennis-score`
+      - setup updates, reboots etc...
+      - setup code to run as daemon (using systemd)
+- Remember to populate and copy `.env` to `/opt/hackathon-table-tennis-score` if you have not already done so
+- Wire up RasPi as per diagram
+- Reboot and Test!
+
 ## Todo
 
 ### Compulsory
@@ -45,3 +69,7 @@ based on: https://github.com/jujhars13/akaal-switch
 
 ### Optional
 - [ ] solder things up to a board
+
+## Licence
+
+[MIT](LICENCE)

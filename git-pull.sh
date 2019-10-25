@@ -4,7 +4,7 @@
 
 echo "Git pulling latest score code $(date)";
 
-(cd /opt/akaal-switch || exit; \
+(cd /opt/hackathon-table-tennis-score || exit; \
   git fetch origin; \
   git reset --hard origin/master; \
   git pull)
