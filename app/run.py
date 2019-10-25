@@ -37,7 +37,7 @@ GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING)
 GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING)
 
 
-def renderDisplay():
+def renderDisplay(win=false):
 
     # Initialise display
     lcd.lcd_init()
@@ -49,8 +49,18 @@ def renderDisplay():
 
     # Send some more text
     lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_1)
-    lcd.lcd_string(f"Player 1: {P1_SCORE}", lcd.LCD_LINE_2)
-    lcd.lcd_string(f"Player 2: {P2_SCORE}", lcd.LCD_LINE_3)
+    if not win:
+        lcd.lcd_string(f"Player 1: {P1_SCORE}", lcd.LCD_LINE_2)
+        lcd.lcd_string(f"Player 2: {P2_SCORE}", lcd.LCD_LINE_3)
+    else:
+        player = "Player 1" if P1_SCORE > P2_SCORE else "Player 2" 
+        lcd.lcd_string(f"WINNER! ")
+
+def checkWin(player):
+    if player == 1:
+        return P1_SCORE >= 21 and (P1_SCORE - P2_SCORE) >= 2
+    else:
+        return P2_SCORE >= 21 and (P2_SCORE - P1_SCORE) >= 2
 
 renderDisplay()
 try:
@@ -58,13 +68,13 @@ try:
         if GPIO.event_detected(PIN_BUTTON_A):
             print(f"\n Button pressed {PIN_BUTTON_A}")
             P1_SCORE += 1
-            renderDisplay()
+            renderDisplay(checkWin(1))
             GPIO.output(PIN_LED_A, GPIO.HIGH)
             GPIO.output(PIN_LED_A, GPIO.LOW)
         if GPIO.event_detected(PIN_BUTTON_B):
             print(f"\n Button pressed {PIN_BUTTON_B}")
             P2_SCORE += 1
-            renderDisplay()
+            renderDisplay(checkWin(2))
             GPIO.output(PIN_LED_B, GPIO.HIGH)
             GPIO.output(PIN_LED_B, GPIO.LOW)
 except KeyboardInterrupt:
