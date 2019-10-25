@@ -42,6 +42,16 @@ try:
             GPIO.output(PIN_LED_B, GPIO.LOW)
         # if GPIO.input(PIN_BUTTON_B):
         #     print(f"\n Button pressed {PIN_BUTTON_B}")
+        GPIO.wait_for_edge(PIN_BUTTON_B, GPIO.RISING)
+        if GPIO.input(PIN_BUTTON_B):
+            print(f"\n Button pressed {PIN_BUTTON_B}")
+            GPIO.output(PIN_LED_B, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(PIN_LED_B, GPIO.LOW)
+            time.sleep(1)
+            GPIO.output(PIN_LED_A, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(PIN_LED_A, GPIO.LOW)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
