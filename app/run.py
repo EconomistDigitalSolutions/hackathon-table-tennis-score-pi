@@ -14,7 +14,7 @@ PIN_BUTTON_B = 37
 PIN_LED_A = 32
 PIN_LED_B = 33
 
-PIN_RESET_BUTTON = 11
+PIN_RESET_BUTTON = 13
 
 # Numbers pins by physical location
 GPIO.setmode(GPIO.BOARD)
