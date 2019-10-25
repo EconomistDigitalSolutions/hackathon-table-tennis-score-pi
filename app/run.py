@@ -58,6 +58,7 @@ def renderDisplay(win=False):
 
 def checkWin(player):
     abs_diff = abs(P1_SCORE - P2_SCORE)
+    print(abs_diff)
     if player == 1:
         return abs_diff >= 2 and P1_SCORE >= 21
     else:
