@@ -82,7 +82,7 @@ try:
             if WIN:
                 P1_GAMES += 1
                 reset()
-                renderDisplay(WIN)
+                renderDisplay(false)
             else:
                 print(f"\n Button pressed {PIN_BUTTON_A}")
                 P1_SCORE += 1
@@ -99,7 +99,7 @@ try:
                 print(f"\n Button pressed {PIN_BUTTON_B}")
                 P2_SCORE += 1
                 WIN = checkWin(2)
-                renderDisplay(WIN)
+                renderDisplay(false)
                 GPIO.output(PIN_LED_B, GPIO.HIGH)
                 GPIO.output(PIN_LED_B, GPIO.LOW)
 except KeyboardInterrupt:
