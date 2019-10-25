@@ -30,7 +30,7 @@ print(f"Waiting for falling edge on port {PIN_BUTTON_A} or {PIN_BUTTON_B}")
 try:
     while True:
         # interrupt, wait until true
-        GPIO.wait_for_edge(PIN_BUTTON_A, GPIO.RISING)
+        GPIO.wait_for_edge(PIN_BUTTON_B, GPIO.RISING)
         if GPIO.input(PIN_BUTTON_A):
             print(f"\n Button pressed {PIN_BUTTON_A}")
             GPIO.output(PIN_LED_A, GPIO.HIGH)
@@ -42,7 +42,7 @@ try:
             GPIO.output(PIN_LED_B, GPIO.LOW)
         # if GPIO.input(PIN_BUTTON_B):
         #     print(f"\n Button pressed {PIN_BUTTON_B}")
-        GPIO.wait_for_edge(PIN_BUTTON_B, GPIO.RISING)
+        GPIO.wait_for_edge(PIN_BUTTON_A, GPIO.RISING)
         if GPIO.input(PIN_BUTTON_B):
             print(f"\n Button pressed {PIN_BUTTON_B}")
             GPIO.output(PIN_LED_B, GPIO.HIGH)
