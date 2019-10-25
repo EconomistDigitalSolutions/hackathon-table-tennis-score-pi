@@ -52,7 +52,7 @@ def renderDisplay():
     lcd.lcd_string(f"Player 1: {P1_SCORE}", lcd.LCD_LINE_2)
     lcd.lcd_string(f"Player 2: {P2_SCORE}", lcd.LCD_LINE_3)
 
-
+renderDisplay()
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
