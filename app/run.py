@@ -84,12 +84,14 @@ def reset():
 
 def handleButton(player):
     playerId = 0 if player == P1 else 1
+    global WIN
     if WIN:
         GAMES[playerId] += 1
         reset()
     else:
         print(f"\n Button pressed {PIN_BUTTON_A}")
         SCORE[playerId] += 1
+        global WIN
         WIN = checkWin(player)
     renderDisplay(WIN)
 
