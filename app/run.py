@@ -15,6 +15,9 @@ PIN_LED_A = 32
 PIN_LED_B = 33
 P1_SCORE = 0
 P2_SCORE = 0
+P1_GAMES = 0
+P2_GAMES = 0
+WIN = False
 
 # Numbers pins by physical location
 GPIO.setmode(GPIO.BOARD)
@@ -52,6 +55,7 @@ def renderDisplay(win=False):
     if not win:
         lcd.lcd_string(f"Player 1: {P1_SCORE}", lcd.LCD_LINE_2)
         lcd.lcd_string(f"Player 2: {P2_SCORE}", lcd.LCD_LINE_3)
+        lcd.lcd_string(f"{P1_GAMES} - {P2_GAMES}", lcd.LCD_LINE_4)
     else:
         player = "Player 1" if P1_SCORE > P2_SCORE else "Player 2" 
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
@@ -64,21 +68,36 @@ def checkWin(player):
     else:
         return abs_diff >= 2 and P2_SCORE >= 21
 
+def reset():
+    P1_SCORE = 0
+    P2_SCORE = 0
+    P1_GAMES = 0
+    P2_GAMES = 0
+    WIN = False 
+
 renderDisplay()
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            print(f"\n Button pressed {PIN_BUTTON_A}")
-            P1_SCORE += 1
-            renderDisplay(checkWin(1))
-            GPIO.output(PIN_LED_A, GPIO.HIGH)
-            GPIO.output(PIN_LED_A, GPIO.LOW)
+            if WIN:
+                reset()
+            else:
+                print(f"\n Button pressed {PIN_BUTTON_A}")
+                P1_SCORE += 1
+                WIN = checkWin(1)
+                GPIO.output(PIN_LED_A, GPIO.HIGH)
+                GPIO.output(PIN_LED_A, GPIO.LOW)
+            renderDisplay(WIN)
         if GPIO.event_detected(PIN_BUTTON_B):
-            print(f"\n Button pressed {PIN_BUTTON_B}")
-            P2_SCORE += 1
-            renderDisplay(checkWin(2))
-            GPIO.output(PIN_LED_B, GPIO.HIGH)
-            GPIO.output(PIN_LED_B, GPIO.LOW)
+            if WIN:
+                reset()
+            else:
+                print(f"\n Button pressed {PIN_BUTTON_B}")
+                P2_SCORE += 1
+                WIN = checkWin(2)
+                GPIO.output(PIN_LED_B, GPIO.HIGH)
+                GPIO.output(PIN_LED_B, GPIO.LOW)
+            renderDisplay(WIN)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
