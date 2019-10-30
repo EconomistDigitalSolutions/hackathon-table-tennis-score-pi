@@ -3,9 +3,9 @@ Description=TableTennisScore
 After=multi-user.target
 
 [Service]
-EnvironmentFile=/opt/EconomistDigitalSolutions/EconomistDigitalSolutions/.env
+EnvironmentFile=/opt/hackathon-table-tennis-score-pi/.env
 Type=idle
-ExecStart=/usr/bin/python3 /opt/EconomistDigitalSolutions/app/run.py
+ExecStart=/usr/bin/python3 /opt/hackathon-table-tennis-score-pi/app/run.py
 
 [Install]
 WantedBy=multi-user.target
