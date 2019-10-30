@@ -3,7 +3,6 @@ Description=TableTennisScore
 After=multi-user.target
 
 [Service]
-EnvironmentFile=/opt/hackathon-table-tennis-score-pi/.env
 Type=idle
 ExecStart=/usr/bin/python3 /opt/hackathon-table-tennis-score-pi/app/run.py
 
