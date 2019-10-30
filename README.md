@@ -56,9 +56,9 @@ based on: https://github.com/jujhars13/akaal-switch
 - [x] pull latest code from github at boot (github deploy key)
 - [x] draw wiring diagram (fritzing)
 - [x] hook up LED response to button press
-- [ ] take photo of dev setup
-- [ ] test lcd screen wireup using `i2cdetect -y 1`
-- [ ] print message to LCD screen
+- [x] take photo of dev setup
+- [x] test lcd screen wireup using `i2cdetect -y 1`
+- [x] print message to LCD screen
 - [ ] wire up buttons and stick to table
 - [ ] stick screen and pi to table tennis table
 - [ ] take photo of mvp setup
