@@ -59,10 +59,10 @@ based on: https://github.com/jujhars13/akaal-switch
 - [x] take photo of dev setup
 - [x] test lcd screen wireup using `i2cdetect -y 1`
 - [x] print message to LCD screen
-- [ ] wire up buttons and stick to table
-- [ ] stick screen and pi to table tennis table
-- [ ] take photo of mvp setup
-- [ ] ensure pi has autoupdates on
+- [x] wire up buttons and stick to table
+- [x] stick screen and pi to table tennis table
+- [x] take photo of mvp setup
+- [x] ensure pi has autoupdates on
 - [ ] deploy prod
     - [ ] test
     - [ ] re-install raspbian lite and redeploy w/ provision script
