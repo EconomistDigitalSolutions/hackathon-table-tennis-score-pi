@@ -41,7 +41,7 @@ echo "enable_tvout=0" | tee -a /boot/config.txt
 cp /opt/hackathon-table-tennis-score-pi/systemd.service /lib/systemd/system/hackathon-table-tennis-score-pi.service
 chmod 644 /lib/systemd/system/hackathon-table-tennis-score-pi.service
 systemctl daemon-reload
-systemctl enable hackathon-table-tennis-score.service
+systemctl enable hackathon-table-tennis-score-pi.service
 
 # deploy git pull on restart
 # use rc.local to prevent directory permissions issues from cron.d
