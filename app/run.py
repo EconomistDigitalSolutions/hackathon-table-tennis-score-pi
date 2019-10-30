@@ -11,17 +11,12 @@ print("Starting Table Tennis Switch")
 # constants
 PIN_BUTTON_A = 36
 PIN_BUTTON_B = 37
-PIN_LED_A = 32
-PIN_LED_B = 33
 
 PIN_RESET_BUTTON = 13
 
 # Numbers pins by physical location
 GPIO.setmode(GPIO.BOARD)
 
-# setup output
-GPIO.setup(PIN_LED_A, GPIO.OUT)
-GPIO.setup(PIN_LED_B, GPIO.OUT)
 # GPIO PIN_BUTTON set up as input.
 GPIO.setup(PIN_BUTTON_A, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(PIN_BUTTON_B, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -38,11 +33,12 @@ GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING)
 GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING)
 GPIO.add_event_detect(PIN_RESET_BUTTON, GPIO.RISING)
 
+
 class GameState:
     p1 = "Player 1"
     p2 = "Player 2"
     score = [0, 0]
-    games = [0,0]
+    games = [0, 0]
     win = False
 
     def resetGame(self):
@@ -52,7 +48,7 @@ class GameState:
     def resetScores(self):
         self.score = [0, 0]
         self.win = False
-    
+
     def checkWin(self, player):
         abs_diff = abs(self.score[0] - self.score[1])
         score = self.score[0] if player == self.p1 else self.score[1]
@@ -77,8 +73,9 @@ def renderDisplay(state):
         lcd.lcd_string(f"{state.p2}: {state.score[1]}", lcd.LCD_LINE_3)
         lcd.lcd_string(f"{state.games[0]} - {state.games[1]}", lcd.LCD_LINE_4)
     else:
-        player = state.p1 if state.score[0] > state.score[1] else state.p2 
+        player = state.p1 if state.score[0] > state.score[1] else state.p2
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
+
 
 def handleButton(player, state):
     playerId = 0 if player == state.p1 else 1
@@ -90,6 +87,7 @@ def handleButton(player, state):
         state.score[playerId] += 1
         state.checkWin(player)
     renderDisplay(state)
+
 
 state = GameState()
 renderDisplay(state)
