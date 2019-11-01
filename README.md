@@ -67,6 +67,8 @@ based on: https://github.com/jujhars13/akaal-switch
     - [ ] test
     - [ ] re-install raspbian lite and redeploy w/ provision script
     - [ ] take photo of final setup
+- [ ] Add buzzer for when someone wins
+- [ ] Add serve indicator
 - [ ] Optional
     - [ ] solder on pi zero header pins
     - [ ] solder things up to a board
