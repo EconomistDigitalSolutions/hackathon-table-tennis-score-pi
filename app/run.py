@@ -29,9 +29,9 @@ print(f"Waiting for falling edge on port {PIN_BUTTON_A} or {PIN_BUTTON_B}")
 # During this waiting time, your computer is not
 # wasting resources by polling for a button press
 
-GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING, None, 500)
-GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING, None, 500)
-GPIO.add_event_detect(PIN_RESET_BUTTON, GPIO.RISING, None, 500)
+GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING, bouncetime=500)
+GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING, bouncetime=500)
+GPIO.add_event_detect(PIN_RESET_BUTTON, GPIO.RISING, bouncetime=500)
 
 
 class GameState:
