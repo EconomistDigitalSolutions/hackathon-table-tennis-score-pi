@@ -20,11 +20,14 @@ class GameState:
 
     def hasWon(self, player):
         abs_diff = abs(self.__score[0] - self.__score[1])
-        __score = self.__score[self.__getPlayerId(player)]
+        __score = self.getScore(player)
         return abs_diff >= 2 and __score >= 21
 
+    def getScore(self, player):
+        return self.__score[self.__getPlayerId(player)]
+
     def printScore(self, player):
-        return f"{player}: {self.__score[self.__getPlayerId(player)]}"
+        return f"{player}: {self.getScore(player)}"
 
     def printGames(self):
         return f"{self.__games[0]} - {self.__games[1]}"
