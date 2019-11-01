@@ -58,6 +58,7 @@ def renderDisplay(state):
 def handlePlayerButton(player, state):
     if state.gameOver:
         state.resetScores()
+        switch_sides()
     else:
         state.scorePoint(player)
     renderDisplay(state)
@@ -68,27 +69,28 @@ def handleResetButton(state):
     renderDisplay(state)
 
 
-def switch_sides(mapping):
-    return {
-        PIN_BUTTON_A: mapping.PIN_BUTTON_B,
-        PIN_BUTTON_B: mapping.PIN_BUTTON_A,
-    }
-
-
 state = game.GameState()
-button_mapping = {
-    PIN_BUTTON_A: state.p1,
-    PIN_BUTTON_B: state.p2,
-}
+
+BUTTON_A_PLAYER = state.p1
+BUTTON_B_PLAYER = state.p2
+
+
+def switch_sides():
+    global BUTTON_A_PLAYER
+    global BUTTON_B_PLAYER
+
+    temp = BUTTON_A_PLAYER
+    BUTTON_A_PLAYER = BUTTON_B_PLAYER
+    BUTTON_B_PLAYER = temp
 
 
 renderDisplay(state)
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            handlePlayerButton(button_mapping[PIN_BUTTON_A], state)
+            handlePlayerButton(BUTTON_A_PLAYER, state)
         if GPIO.event_detected(PIN_BUTTON_B):
-            handlePlayerButton(button_mapping[PIN_BUTTON_B], state)
+            handlePlayerButton(BUTTON_B_PLAYER, state)
         if GPIO.event_detected(PIN_RESET_BUTTON):
             handleResetButton(state)
 except KeyboardInterrupt:

@@ -3,7 +3,6 @@ class GameState:
     def __init__(self, p1="Player 1", p2="Player 2"):
         self.p1 = p1
         self.p2 = p2
-        self.__switchSides = False
         self.resetGame()
 
     def resetGame(self):
@@ -13,7 +12,6 @@ class GameState:
     def resetScores(self):
         self.__score = [0, 0]
         self.gameOver = False
-        self.__switchSides = not self.__switchSides
 
     def scorePoint(self, player):
         self.__score[self.__getPlayerId(player)] += 1
@@ -39,7 +37,4 @@ class GameState:
         self.gameOver = True
 
     def __getPlayerId(self, player):
-        playerId = 0 if player == self.p1 else 1
-        if self.__switchSides:
-            playerId = 1 - playerId
-        return playerId
+        return 0 if player == self.p1 else 1
