@@ -66,6 +66,10 @@ def handlePlayerButton(player, state):
 
 def handleResetButton(state):
     state.resetGame()
+    global BUTTON_A_PLAYER
+    global BUTTON_B_PLAYER
+    BUTTON_A_PLAYER = state.p1
+    BUTTON_B_PLAYER = state.p2
     renderDisplay(state)
 
 
