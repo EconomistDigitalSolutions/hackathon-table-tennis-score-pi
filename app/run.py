@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 # our libs
-from src import lcd
+from src import lcd, game
 
 print("Starting Table Tennis Switch")
 
@@ -34,28 +34,6 @@ GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING, bouncetime=500)
 GPIO.add_event_detect(PIN_RESET_BUTTON, GPIO.RISING, bouncetime=500)
 
 
-class GameState:
-    p1 = "Player 1"
-    p2 = "Player 2"
-    score = [0, 0]
-    games = [0, 0]
-    win = False
-
-    def resetGame(self):
-        self.games = [0, 0]
-        self.resetScores()
-
-    def resetScores(self):
-        self.score = [0, 0]
-        self.win = False
-
-    def checkWin(self, player):
-        abs_diff = abs(self.score[0] - self.score[1])
-        score = self.score[0] if player == self.p1 else self.score[1]
-        self.win = abs_diff >= 2 and score >= 21
-        return self.win
-
-
 def renderDisplay(state):
 
     # Initialise display
@@ -68,34 +46,44 @@ def renderDisplay(state):
 
     # Send some more text
     lcd.lcd_string(f"{date_time}", lcd.LCD_LINE_1)
-    if not state.win:
-        lcd.lcd_string(f"{state.p1}: {state.score[0]}", lcd.LCD_LINE_2)
-        lcd.lcd_string(f"{state.p2}: {state.score[1]}", lcd.LCD_LINE_3)
-        lcd.lcd_string(f"{state.games[0]} - {state.games[1]}", lcd.LCD_LINE_4)
+    if not state.gameOver:
+        lcd.lcd_string(f"{state.printScore(state.p1)}", lcd.LCD_LINE_2)
+        lcd.lcd_string(f"{state.printScore(state.p2)}", lcd.LCD_LINE_3)
+        lcd.lcd_string(f"{state.printGames()}", lcd.LCD_LINE_4)
     else:
-        player = state.p1 if state.score[0] > state.score[1] else state.p2
+        player = state.p1 if state.hasWon(state.p1) else state.p2
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
 
 def handleButton(player, state):
-    playerId = 0 if player == state.p1 else 1
-    if state.win:
-        state.games[playerId] += 1
+    if state.gameOver:
         state.resetScores()
     else:
-        state.score[playerId] += 1
-        state.checkWin(player)
+        state.scorePoint(player)
     renderDisplay(state)
 
 
-state = GameState()
+def switch_sides(mapping):
+    return {
+        PIN_BUTTON_A: mapping.PIN_BUTTON_B,
+        PIN_BUTTON_B: mapping.PIN_BUTTON_A,
+    }
+
+
+state = game.GameState()
+button_mapping = {
+    PIN_BUTTON_A: state.p1,
+    PIN_BUTTON_B: state.p2,
+}
+
+
 renderDisplay(state)
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            handleButton(state.p1, state)
+            handleButton(button_mapping[PIN_BUTTON_A], state)
         if GPIO.event_detected(PIN_BUTTON_B):
-            handleButton(state.p2, state)
+            handleButton(button_mapping[PIN_BUTTON_B], state)
         if GPIO.event_detected(PIN_RESET_BUTTON):
             print(f"\n Button pressed {PIN_RESET_BUTTON}")
             state.resetGame()
