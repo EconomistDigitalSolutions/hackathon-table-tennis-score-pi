@@ -67,6 +67,7 @@ based on: https://github.com/jujhars13/akaal-switch
     - [ ] test
     - [ ] re-install raspbian lite and redeploy w/ provision script
     - [ ] take photo of final setup
+- [ ] Switch sides after game
 - [ ] Add buzzer for when someone wins
 - [ ] Add serve indicator
 - [ ] Optional
