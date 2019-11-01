@@ -55,12 +55,12 @@ def renderDisplay(state):
         lcd.lcd_string(f"WINNER! {player}", lcd.LCD_LINE_2)
 
 
-def handleButton(player, state):
+def handlePlayerButton(player, state):
     if state.gameOver:
         state.resetScores()
     else:
         state.scorePoint(player)
-    renderDisplay(state)
+    # renderDisplay(state)
 
 
 def switch_sides(mapping):
@@ -81,13 +81,13 @@ renderDisplay(state)
 try:
     while True:
         if GPIO.event_detected(PIN_BUTTON_A):
-            handleButton(button_mapping[PIN_BUTTON_A], state)
+            handlePlayerButton(button_mapping[PIN_BUTTON_A], state)
         if GPIO.event_detected(PIN_BUTTON_B):
-            handleButton(button_mapping[PIN_BUTTON_B], state)
+            handlePlayerButton(button_mapping[PIN_BUTTON_B], state)
         if GPIO.event_detected(PIN_RESET_BUTTON):
             print(f"\n Button pressed {PIN_RESET_BUTTON}")
             state.resetGame()
-            renderDisplay(state)
+        renderDisplay(state)
 except KeyboardInterrupt:
     GPIO.cleanup()       # clean up GPIO on CTRL+C exit
 
