@@ -29,9 +29,9 @@ print(f"Waiting for falling edge on port {PIN_BUTTON_A} or {PIN_BUTTON_B}")
 # During this waiting time, your computer is not
 # wasting resources by polling for a button press
 
-GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING, 500)
-GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING, 500)
-GPIO.add_event_detect(PIN_RESET_BUTTON, GPIO.RISING, 500)
+GPIO.add_event_detect(PIN_BUTTON_A, GPIO.RISING, None, 500)
+GPIO.add_event_detect(PIN_BUTTON_B, GPIO.RISING, None, 500)
+GPIO.add_event_detect(PIN_RESET_BUTTON, GPIO.RISING, None, 500)
 
 
 class GameState:
@@ -83,7 +83,6 @@ def handleButton(player, state):
         state.games[playerId] += 1
         state.resetScores()
     else:
-        print(f"\n Button pressed {PIN_BUTTON_A}")
         state.score[playerId] += 1
         state.checkWin(player)
     renderDisplay(state)
