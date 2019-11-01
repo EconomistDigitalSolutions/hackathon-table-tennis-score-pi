@@ -17,8 +17,8 @@ class GameState:
     def scorePoint(self, player):
         self.__score[self.__getPlayerId(player)] += 1
         if self.hasWon(player):
-            self.__switchSides = not self.__switchSides
             self.__scoreGame(player)
+            self.__switchSides = not self.__switchSides
 
     def hasWon(self, player):
         abs_diff = abs(self.__score[0] - self.__score[1])
