@@ -27,7 +27,7 @@ class GameState:
         return f"{player}: {self.__score[self.__getPlayerId(player)]}"
 
     def printGames(self):
-        return f"{self.__games[0] - self.__games[1]}"
+        return f"{self.__games[0]} - {self.__games[1]}"
 
     def __scoreGame(self, player):
         self.__games[self.__getPlayerId(player)] += 1
